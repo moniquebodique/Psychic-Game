@@ -1,54 +1,108 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-us">
 
 <head>
   <meta charset="UTF-8">
-  <title>About | Your Name</title>
-  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <title>The Pyschic Game</title>
+  <!--Bootstrap Link -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+  <!-- Link CSS -->
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <img src="http://static.tvtropes.org/pmwiki/pub/images/crystal_ball.jpg" alt="Crystal Ball">
+  <h1 class="Main" style= " font-size:100%" > The Pyschic Game: Try to guess the letter the computer has picked! <h1>
+  <h2 style= "font-size:100%"> Are you pyschic? <h2>
+
 </head>
 
-<body>
+<body style="background-color:grey;">
 
-  <header id="masthead">
-    <div class="container">
-      <a href="index.html" id="logo">Your Name</a>
-      <nav>
-        <a href="index.html">About</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <div id="main-container" class="container">
-    <section class="main-section">
-      <h1>About Me</h1>
-
-      <img src="assets/images/cat.jpg" class="auth-image" alt="Your Name">
-
-      <p>Marshmallow jelly souffl&eacute; pastry biscuit gummi bears tootsie roll tootsie roll gingerbread. Cotton candy muffin gingerbread fruitcake. Sweet roll souffl&eacute; topping wafer croissant oat cake gummi&nbsp;bears.</p>
-
-      <p>Jelly-o cheesecake dessert fruitcake ice cream brownie liquorice souffl&eacute;. Caramels biscuit gummi bears tiramisu chupa chups. Croissant macaroon cotton candy cake pudding.</p>
-
-    </section>
-
-    <section class="sidebar">
-      <div id="connect">
-        <h2>Connect with Me</h2>
-
-        <a href="#"><img src="assets/images/github-128.png" class="social" alt="GitHub" /></a>
-        <a href="#"><img src="assets/images/linkedin-128.png" class="social" alt="LinkedIn" /></a>
-        <a href="#"><img src="assets/images/stackoverflow-128.png" class="social" alt="Stack Overflow" /></a>
-      </div>
-    </section>
+  <div id="game">
+    <p style= " font-size:50%" >Guess what letter I'm thinking of:</p>
   </div>
 
-  <footer>
-    <div class="container">
-      Copyright &copy; 2016 Your Name
-    </div>
-  </footer>
+  <script type="text/javascript">
+
+    // Creates an array that lists out all of the options
+    var computerChoices = ["a", "b", "d", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "2y", "z" ] ;
+    var userGuess ;
+
+
+ // Creating variables to hold the number of wins, losses, and ties. They start at 0.
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 10;
+    var yourGuessesSoFar = [];
+      
+    var guessedLetters = [];
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+    // Function to reset everything
+   var reset = function() {
+     guessesLeft = 10;
+     yourGuessesSoFar = [];
+     } 
+
+   
+    // This function is run whenever the user presses a key.
+    document.onkeyup = function(event) {
+
+      // Determines which key was pressed.
+      userGuess = event.key;
+      console.log (userGuess)
+
+
+      // Randomly chooses a choice from the options array. This is the Computer's guess.
+      
+      console.log(computerGuess)
+      // Reworked our code from last step to useh.fl "else if" instead of lots of if statements.
+
+      // This logic determines the outcome of the game and increments the appropriate numbe
+
+
+      if (userGuess === computerGuess) {
+            wins++;
+            guessesLeft = 10;
+            yourGuessesSoFar = [];
+            alert ("You are a pyschic!");
+            }
+
+      else if (userGuess != computerGuess) {
+            guessesLeft --;
+            }
+
+      if ((guessesLeft === 0 )) {
+          losses++;
+          guessesLeft = 10;
+          yourGuessesSoFar = [];
+          alert ("You lose!")
+        }
+        
+        yourGuessesSoFar.push(userGuess);
+
+        // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.
+        var html =
+
+          "<p>wins: " + wins + "</p>" +
+          "<p>losses: " + losses + "</p>" +
+          "<p>Guesses Left: " + guessesLeft + "</p>"+
+          "<p>Your guesses so far: " + yourGuessesSoFar + "</p>";
+
+
+        // Set the inner HTML contents of the #game div to our html string
+        document.querySelector("#game").innerHTML = html;
+      
+    };
+  </script>
+
 </body>
+  
+   
+
+
+
+
+
 
 </html>
